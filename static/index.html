@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>viewer</title>
+	<link rel="stylesheet" href="/view.css" type="text/css">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-59092114-3"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+
+		function gtag()
+		{
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-59092114-3');
+	</script>
+
+</head>
+
+<body>
+	<div id="app">
+		<div class="albums">
+			<a v-for="track in tracks" class="album-image" v-bind:style="computeImage(track)"
+				:href="track.track.external_urls.spotify" target="_blank" rel="noopener noreferrer">
+				<div class="album-overlay">
+					<span class="name">{{ track.track.name }}</span>
+					<span class="info">{{ computeArtists(track) }}</span>
+					<i class="info">{{ track.track.album.name }}</i>
+				</div>
+			</a>
+		</div>
+		<div class="button" v-on:click="fetchTracks" v-if="showLoadMore">load more...</div>
+	</div>
+	<script src="js/vue.js"></script>
+	<script src="js/view.js" defer></script>
+</body>
+
+</html>

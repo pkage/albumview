@@ -1,0 +1,25 @@
+{
+  "name": "credgrab",
+  "version": "1.0.0",
+  "description": "spotify api oauth2 credential cacher",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quadnix/albumview.git"
+  },
+  "author": "patrick kage",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quadnix/albumview/issues"
+  },
+  "homepage": "https://github.com/quadnix/albumview#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "querystring": "^0.2.0",
+    "request": "^2.83.0"
+  }
+}
