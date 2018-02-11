@@ -20,6 +20,11 @@ window.app = new Vue({
 			fetch(`/tracks?offset=${this.tracks.length}`)
 				.then(r => r.json())
 				.then(r => {
+					if (r.items === undefined) {
+						fetch('/refresh_token')
+						setTimeout(3000, () => this.fetchTracks())
+						return
+					}
 					this.showLoadMore = r.items.length > 0
 					this.tracks = this.tracks.concat(r.items)
 				})
