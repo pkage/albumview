@@ -22,7 +22,7 @@ window.app = new Vue({
 				.then(r => {
 					if (r.items === undefined) {
 						fetch('/refresh_token')
-						setTimeout(3000, () => this.fetchTracks())
+						setTimeout(3000, () => window.location.reload(true))
 						return
 					}
 					this.showLoadMore = r.items.length > 0
