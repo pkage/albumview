@@ -20,13 +20,13 @@ window.app = new Vue({
 			fetch(`/tracks?offset=${this.tracks.length}`)
 				.then(r => r.json())
 				.then(r => {
-					if (r.items === undefined) {
+					this.showLoadMore = r.items.length > 0
+					this.tracks = this.tracks.concat(r.items)
+					if (r.items === undefined || r.length === 0 || this.tracks.length === 0) {
 						fetch('/refresh_token')
 						setTimeout(3000, () => window.location.reload(true))
 						return
 					}
-					this.showLoadMore = r.items.length > 0
-					this.tracks = this.tracks.concat(r.items)
 				})
 		}
 	}
