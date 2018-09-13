@@ -16,16 +16,22 @@ window.app = new Vue({
 		computeArtists: function(track) {
 			return track.track.artists.map(a => a.name).join(', ')
 		},
+		harshReload: function() {
+			fetch('/refresh_token')
+			setTimeout(3000, () => window.location.reload(true))
+		},
 		fetchTracks: function() {
 			fetch(`/tracks?offset=${this.tracks.length}`)
 				.then(r => r.json())
 				.then(r => {
-					this.showLoadMore = r.items.length > 0
-					this.tracks = this.tracks.concat(r.items)
-					if (r.items === undefined || r.items.length === 0 || this.tracks.length === 0) {
-						fetch('/refresh_token')
-						setTimeout(3000, () => window.location.reload(true))
-						return
+					try {
+						this.showLoadMore = r.items.length > 0
+						this.tracks = this.tracks.concat(r.items)
+						if (this.tracks.length === 0) {
+							this.harshReload()
+						}
+					} catch (e) {
+						this.harshReload()
 					}
 				})
 		}
