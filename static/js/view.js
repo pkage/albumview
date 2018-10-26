@@ -18,10 +18,12 @@ window.app = new Vue({
 		},
 		harshReload: function() {
 			fetch('/refresh_token')
-			setTimeout(3000, () => window.location.reload(true))
+				.then(() => this.fetchTracks())
 		},
 		fetchTracks: function() {
-			fetch(`/tracks?offset=${this.tracks.length}`)
+			fetch(`/tracks?offset=${this.tracks.length}`, {
+				cache: 'no-store'
+			})
 				.then(r => r.json())
 				.then(r => {
 					try {
